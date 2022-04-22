@@ -3,9 +3,8 @@ LABEL maintainer="tonymtz <hello@tonymtz.com>"
 WORKDIR /usr/src/app
 COPY package*.json ./
 ARG PORT=$PORT
-ENV NODE_ENV=production
 RUN npm install
-RUN npm run build
 COPY . .
+RUN npm run build
 EXPOSE ${PORT}
 CMD [ "npm", "start" ]
