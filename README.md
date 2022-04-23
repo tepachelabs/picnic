@@ -12,6 +12,10 @@ npm run dev
 
 This starts your app in development mode, rebuilding assets on file changes.
 
+### Database
+
+![Database diagram](docs/db.png)
+
 ## Deployment
 
 First, build your app for production:
