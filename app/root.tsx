@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -6,19 +6,26 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
+} from '@remix-run/react'
+import type { LinksFunction } from '@remix-run/node'
+import stylesUrl from '~/styles/global.css'
 
 export const meta: MetaFunction = () => ({
-  charset: "utf-8",
-  title: "New Remix App",
-  viewport: "width=device-width,initial-scale=1",
-});
+  charset: 'utf-8',
+  title: 'Juegathon 2022',
+  viewport: 'width=device-width,initial-scale=1',
+})
 
-export default function App() {
+export const links: LinksFunction = () => {
+  return [
+    { rel: 'stylesheet', href: stylesUrl },
+  ]
+}
+
+export default function App () {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
-        <title>Juegathon</title>
         <Meta />
         <Links />
       </head>
@@ -29,5 +36,5 @@ export default function App() {
         <LiveReload />
       </body>
     </html>
-  );
+  )
 }
