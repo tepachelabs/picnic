@@ -21,17 +21,27 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData()
-  const title = form.get('title') as string
-  const handler = form.get('handler') as string
-  const fields = { title, handler }
 
-  const network = await db.network.update({
-    where: {
-      id: params.networkId,
-    },
-    data: fields,
-  })
-  return redirect(`${network.id}`)
+  if (form.get('_method') === 'delete') {
+    await db.network.delete({
+      where: {
+        id: params.networkId,
+      },
+    })
+    return redirect(`/admin/players/${params.playerId}`)
+  } else {
+    const title = form.get('title') as string
+    const handler = form.get('handler') as string
+    const fields = { title, handler }
+
+    await db.network.update({
+      where: {
+        id: params.networkId,
+      },
+      data: fields,
+    })
+    return redirect(`/admin/players/${params.playerId}`)
+  }
 }
 
 export default function NetworkEditRoute () {
@@ -54,7 +64,11 @@ export default function NetworkEditRoute () {
         </select>
         <input name="handler" defaultValue={network.handler}/>
 
-        <input type="submit"/>
+        <input type="submit" value="update"/>
+      </form>
+      <form method="post">
+        <input type="hidden" name='_method' value='delete'/>
+        <input type="submit" value="delete"/>
       </form>
     </div>
   )

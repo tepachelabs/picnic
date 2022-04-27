@@ -52,6 +52,8 @@ export default function PlayerRoute () {
         <input type="submit"/>
       </form>
 
+      <Link to={`/admin/players/${player.id}/network/new`}>Add network</Link>
+
       {player.networks && (
         <div>
           <ul>

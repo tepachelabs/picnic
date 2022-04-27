@@ -3,7 +3,7 @@ import { redirect } from '@remix-run/node'
 
 import { db } from '~/utils/db.server'
 
-export const action: ActionFunction = async ({ request, params }) => {
+export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
   const name = form.get('name') as string
   const thumbnail = form.get('thumbnail') as string
