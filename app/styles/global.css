@@ -2,3 +2,14 @@ body {
     font-family: system-ui, sans-serif;
     line-height: 1.4
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #eee;
+        background: #121212;
+    }
+
+    a {
+        color: #809fff;
+    }
+}

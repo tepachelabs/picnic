@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
 } from '@remix-run/react'
 import type { LinksFunction } from '@remix-run/node'
+
 import stylesUrl from '~/styles/global.css'
 
 export const meta: MetaFunction = () => ({
@@ -26,14 +27,14 @@ export default function App () {
   return (
     <html lang="es">
       <head>
-        <Meta />
-        <Links />
+        <Meta/>
+        <Links/>
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
+        <Outlet/>
+        <ScrollRestoration/>
         <Scripts />
-        <LiveReload />
+        {process.env.NODE_ENV === 'development' && <LiveReload/>}
       </body>
     </html>
   )

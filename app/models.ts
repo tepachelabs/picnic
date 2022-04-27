@@ -5,7 +5,7 @@ import type {
   TimeSlot as PrismaTimeSlot,
 } from '@prisma/client'
 
-type Player = PrismaPlayer & {
+export type Player = PrismaPlayer & {
   networks?: Network[]
 }
 
