@@ -30,6 +30,8 @@ export default function ScheduleRoute () {
     <section>
       <h2>Players</h2>
 
+      <Link to='/admin/players/new'>Add</Link>
+
       <ul>
         {players.map((player) => (
           <li key={player.id}>

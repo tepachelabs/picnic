@@ -34,7 +34,7 @@ export const action: ActionFunction = async ({ request, params }) => {
     },
     data: fields,
   })
-  return redirect(`/admin/players/${player.id}/edit`)
+  return redirect(`${player.id}`)
 }
 
 export default function PlayerRoute () {
