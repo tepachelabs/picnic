@@ -23,18 +23,28 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export const action: ActionFunction = async ({ request, params }) => {
   const form = await request.formData()
-  const name = form.get('name') as string
-  const thumbnail = form.get('thumbnail') as string
-  const description = form.get('description') as string
-  const fields = { name, thumbnail, description }
 
-  const player = await db.player.update({
-    where: {
-      id: params.playerId,
-    },
-    data: fields,
-  })
-  return redirect(`${player.id}`)
+  if (form.get('_method') === 'delete') {
+    await db.player.delete({
+      where: {
+        id: params.playerId,
+      },
+    })
+    return redirect('/admin/players')
+  } else {
+    const name = form.get('name') as string
+    const thumbnail = form.get('thumbnail') as string
+    const description = form.get('description') as string
+    const fields = { name, thumbnail, description }
+
+    const player = await db.player.update({
+      where: {
+        id: params.playerId,
+      },
+      data: fields,
+    })
+    return redirect(`${player.id}`)
+  }
 }
 
 export default function PlayerRoute () {
@@ -50,6 +60,10 @@ export default function PlayerRoute () {
         <textarea name="description" defaultValue={player.description}/>
 
         <input type="submit"/>
+      </form>
+      <form method="post">
+        <input type="hidden" name='_method' value='delete'/>
+        <input type="submit" value="delete"/>
       </form>
 
       <Link to={`/admin/players/${player.id}/network/new`}>Add network</Link>
